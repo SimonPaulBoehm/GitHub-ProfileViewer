@@ -1,0 +1,12 @@
+{
+  "name": "github-profile-viewer",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n \"api,frontend\" -c \"cyan,magenta\" \"npm run dev --prefix git-pv-api\" \"npm run dev --prefix frontend\"",
+    "dev:api":      "npm run dev --prefix git-pv-api",
+    "dev:frontend": "npm run dev --prefix frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
