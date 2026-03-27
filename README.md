@@ -103,7 +103,7 @@ Der gesamte Fetch-State (`profile`, `repos`, `loading`, `error`) steckt in einem
 
 ### Frontend — Vite Proxy statt CORS-Workaround
 
-Statt die API-URL im Frontend hartzucodieren, leitet `vite.config.js` alle `/github/*`-Anfragen an `localhost:3000` weiter. Im Browser erscheinen die Requests als Same-Origin-Anfragen — kein CORS-Problem, keine API-URL im Frontend-Bundle. Für den Production-Build gibt es die `VITE_API_URL`-Umgebungsvariable.
+Statt die API-URL im Frontend hartzucodieren, leitet `vite.config.js` alle `/github/*`-Anfragen an `localhost:3000` weiter. Im Browser erscheinen die Requests als Same-Origin-Anfragen, kein CORS-Problem, keine API-URL im Frontend-Bundle. Für den Production-Build gibt es die `VITE_API_URL`-Umgebungsvariable.
 
 ### Frontend — CSS Custom Properties statt CSS-Framework
 
@@ -111,7 +111,7 @@ Kein Tailwind, kein Bootstrap. Alle Design-Tokens (Farben, Radien, Shadows) steh
 
 ### UI — "Terminal Luxe" Ästhetik
 
-Das Design kombiniert Terminal-Energie (`Syne Mono` als Display-Font, Teal-Akzentfarbe) mit reduzierter Eleganz (Glasmorphismus-Cards, SVG-Noise-Textur, staggered Animations). Die Zielgruppe sind Entwickler — das Design spricht deren Sprache, ohne generisch zu wirken.
+Das Design kombiniert Terminal-Energie (`Syne Mono` als Display-Font, Teal-Akzentfarbe) mit reduzierter Eleganz (Glasmorphismus-Cards, SVG-Noise-Textur, staggered Animations). Die Zielgruppe sind Entwickler, das Design spricht deren Sprache, ohne generisch zu wirken.
 
 ---
 
