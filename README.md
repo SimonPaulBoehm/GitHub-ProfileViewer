@@ -26,12 +26,12 @@
 
 ## Features
 
-- **Profilsuche** — beliebigen GitHub-Usernamen suchen
-- **Profil-Übersicht** — Avatar, Name, Bio sowie Follower-, Following- und Repo-Anzahl
-- **Top-10-Repos** — sortiert nach Stars, serverseitig gefiltert
-- **Sprachkodierung** — Programmiersprache mit GitHub-Farbkodierung pro Repo-Karte
-- **Fehlerbehandlung** — saubere Anzeige für nicht existierende User
-- **Responsives Layout** — Mobile + Desktop
+- **Profilsuche** -> beliebigen GitHub-Usernamen suchen
+- **Profil-Übersicht** -> Avatar, Name, Bio sowie Follower-, Following- und Repo-Anzahl
+- **Top-10-Repos** —> sortiert nach Stars, serverseitig gefiltert
+- **Sprachkodierung** —> Programmiersprache mit GitHub-Farbkodierung pro Repo-Karte
+- **Fehlerbehandlung** —> saubere Anzeige für nicht existierende User
+- **Responsives Layout** —> Mobile + Desktop
 
 ---
 
@@ -93,49 +93,49 @@ GET /github/user/SimonPaulBoehm
 GET /github/repos/SimonPaulBoehm
 ```
 
-Das Backend ruft die GitHub API auf, filtert die Antwort auf relevante Felder und gibt sie weiter — ohne Token, da nur öffentliche Endpunkte genutzt werden.
+Das Backend ruft die GitHub API auf, filtert die Antwort auf relevante Felder und gibt sie weiter, ohne Token, da nur öffentliche Endpunkte genutzt werden.
 
 ---
 
 ## Design-Entscheidungen
 
 <details>
-<summary><strong>Backend — Daten auf dem Server filtern</strong></summary>
+<summary><strong>Backend —> Daten auf dem Server filtern</strong></summary>
 
 Die GitHub API gibt pro User-Objekt über 30 Felder zurück. Das Backend leitet davon nur 8 weiter (`login`, `name`, `avatar_url`, `bio`, `public_repos`, `followers`, `following`, `html_url`). Das macht die Payload kleiner und das Frontend-Interface stabiler.
 
 </details>
 
 <details>
-<summary><strong>Backend — Top-10-Sortierung serverseitig</strong></summary>
+<summary><strong>Backend —> Top-10-Sortierung serverseitig</strong></summary>
 
 Repos werden mit `?per_page=100` abgerufen, serverseitig nach `stargazers_count` sortiert und auf 10 gekürzt. Die Sortierlogik gehört nicht ins Frontend, weil sie unabhängig vom UI-Framework wiederverwendet werden kann und das Frontend keine 100 Objekte parsen muss.
 
 </details>
 
 <details>
-<summary><strong>Frontend — Custom Hook <code>useGitHub</code></strong></summary>
+<summary><strong>Frontend —> Custom Hook <code>useGitHub</code></strong></summary>
 
 Der gesamte Fetch-State (`profile`, `repos`, `loading`, `error`) steckt in einem einzigen Hook. `App.jsx` bleibt damit eine reine Layout-Komponente ohne eigene Logik. Wenn die Datenquelle später wechselt (z. B. GraphQL statt REST), wird nur der Hook angepasst.
 
 </details>
 
 <details>
-<summary><strong>Frontend — Vite Proxy statt CORS-Workaround</strong></summary>
+<summary><strong>Frontend —> Vite Proxy statt CORS-Workaround</strong></summary>
 
 Statt die API-URL im Frontend hartzucodieren, leitet `vite.config.js` alle `/github/*`-Anfragen an `localhost:3000` weiter. Im Browser erscheinen die Requests als Same-Origin-Anfragen, kein CORS-Problem, keine API-URL im Frontend-Bundle. Für den Production-Build gibt es die `VITE_API_URL`-Umgebungsvariable.
 
 </details>
 
 <details>
-<summary><strong>Frontend — CSS Custom Properties statt CSS-Framework</strong></summary>
+<summary><strong>Frontend —> CSS Custom Properties statt CSS-Framework</strong></summary>
 
 Kein Tailwind, kein Bootstrap. Alle Design-Tokens (Farben, Radien, Shadows) stehen als CSS-Variablen in `:root`. Das hält das CSS-Bundle klein, gibt volle Kontrolle über jeden Pixel und vermeidet unnötige Build-Komplexität für ein Projekt dieser Größe.
 
 </details>
 
 <details>
-<summary><strong>UI — "Terminal Luxe" Ästhetik</strong></summary>
+<summary><strong>UI —> "Terminal Luxe" Ästhetik</strong></summary>
 
 Das Design kombiniert Terminal-Energie (`Syne Mono` als Display-Font, Teal-Akzentfarbe) mit reduzierter Eleganz (Glasmorphismus-Cards, SVG-Noise-Textur, staggered Animations). Die Zielgruppe sind Entwickler, das Design spricht deren Sprache, ohne generisch zu wirken.
 
